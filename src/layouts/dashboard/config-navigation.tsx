@@ -237,12 +237,6 @@ export function useNavData() {
             ],
           },
           {
-            title: t('item_disabled'),
-            path: '#disabled',
-            icon: ICONS.disabled,
-            disabled: true,
-          },
-          {
             title: t('item_label'),
             path: '#label',
             icon: ICONS.label,
