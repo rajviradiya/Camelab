@@ -9,7 +9,6 @@ import { useSettingsContext } from 'src/components/settings';
 
 import BankingContacts from '../banking-contacts';
 import BankingQuickTransfer from '../banking-quick-transfer';
-import BankingInviteFriends from '../banking-invite-friends';
 import BankingWidgetSummary from '../banking-widget-summary';
 import BankingCurrentBalance from '../banking-current-balance';
 import BankingBalanceStatistics from '../banking-balance-statistics';
@@ -186,13 +185,6 @@ export default function OverviewBankingView() {
               title="Contacts"
               subheader="You have 122 contacts"
               list={_bankingContacts.slice(-5)}
-            />
-
-            <BankingInviteFriends
-              price="$50"
-              title={`Invite friends \n and earn`}
-              description="Praesent egestas tristique nibh. Duis lobortis massa imperdiet quam."
-              img="/assets/illustrations/characters/character_11.png"
             />
           </Stack>
         </Grid>
