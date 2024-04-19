@@ -52,7 +52,7 @@ export default function App() {
             themeDirection: 'ltr', //  'rtl' | 'ltr'
             themeContrast: 'default', // 'default' | 'bold'
             themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-            themeColorPresets: 'purple', 
+            themeColorPresets: 'purple',
             themeStretch: false,
           }}
         >

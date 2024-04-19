@@ -53,11 +53,6 @@ export function useNavData() {
             icon: ICONS.dashboard,
           },
           {
-            title: t('ecommerce'),
-            path: paths.dashboard.general.ecommerce,
-            icon: ICONS.ecommerce,
-          },
-          {
             title: t('analytics'),
             path: paths.dashboard.general.analytics,
             icon: ICONS.analytics,
@@ -191,17 +186,6 @@ export function useNavData() {
             icon: ICONS.mail,
             info: <Label color="error">+32</Label>,
           },
-
-          
-
-          // CALENDAR
-          {
-            title: t('calendar'),
-            path: paths.dashboard.calendar,
-            icon: ICONS.calendar,
-          },
-
-          
         ],
       },
     ],
