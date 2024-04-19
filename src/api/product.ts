@@ -5,8 +5,6 @@ import { fetcher, endpoints } from 'src/utils/axios';
 
 import { IProductItem } from 'src/types/product';
 
-// ----------------------------------------------------------------------
-
 export function useGetProducts() {
   const URL = endpoints.product.list;
 

@@ -11,7 +11,6 @@ import { LoadingScreen } from 'src/components/loading-screen';
 // OVERVIEW
 const IndexPage = lazy(() => import('src/pages/dashboard/app'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
-const OverviewBookingPage = lazy(() => import('src/pages/dashboard/booking'));
 const OverviewFilePage = lazy(() => import('src/pages/dashboard/file'));
 // PRODUCT
 const ProductDetailsPage = lazy(() => import('src/pages/dashboard/product/details'));
@@ -73,7 +72,6 @@ export const dashboardRoutes = [
     children: [
       { element: <IndexPage />, index: true },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
-      { path: 'booking', element: <OverviewBookingPage /> },
       { path: 'file', element: <OverviewFilePage /> },
       {
         path: 'user',
