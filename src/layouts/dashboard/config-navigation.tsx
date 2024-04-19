@@ -29,7 +29,6 @@ const ICONS = {
   label: icon('ic_label'),
   blank: icon('ic_blank'),
   folder: icon('ic_folder'),
-  booking: icon('ic_booking'),
   invoice: icon('ic_invoice'),
   product: icon('ic_product'),
   disabled: icon('ic_disabled'),
@@ -60,11 +59,6 @@ export function useNavData() {
             title: t('analytics'),
             path: paths.dashboard.general.analytics,
             icon: ICONS.analytics,
-          },
-          {
-            title: t('booking'),
-            path: paths.dashboard.general.booking,
-            icon: ICONS.booking,
           },
           {
             title: t('file'),
