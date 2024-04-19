@@ -179,57 +179,99 @@ export const _ecommerceNewProducts = [...Array(5)].map((_, index) => ({
   coverUrl: _mock.image.product(index),
 }));
 
-// BOOKING
+// BANKING
 // ----------------------------------------------------------------------
 
-export const _bookings = [...Array(5)].map((_, index) => {
-  const status = ['Paid', 'Paid', 'Pending', 'Cancelled', 'Paid'][index];
-
-  const customer = {
-    avatarUrl: _mock.image.avatar(index),
-    name: _mock.fullName(index),
-    phoneNumber: _mock.phoneNumber(index),
-  };
-
-  const destination = [...Array(5)].map((__, _index) => ({
-    name: _mock.tourName(_index + 1),
-    coverUrl: _mock.image.travel(_index + 1),
-  }))[index];
-
-  return {
-    id: _mock.id(index),
-    destination,
-    status,
-    customer,
-    checkIn: _mock.time(index),
-    checkOut: _mock.time(index),
-  };
-});
-
-export const _bookingsOverview = [...Array(3)].map((_, index) => ({
-  status: ['Pending', 'Canceled', 'Sold'][index],
-  quantity: _mock.number.nativeL(index),
-  value: _mock.number.percent(index),
-}));
-
-export const _bookingReview = [...Array(5)].map((_, index) => ({
+export const _bankingContacts = [...Array(12)].map((_, index) => ({
   id: _mock.id(index),
   name: _mock.fullName(index),
-  postedAt: _mock.time(index),
-  rating: _mock.number.rating(index),
+  email: _mock.email(index),
   avatarUrl: _mock.image.avatar(index),
-  description: _mock.description(index),
-  tags: ['Great Sevice', 'Recommended', 'Best Price'],
 }));
 
-export const _bookingNew = [...Array(5)].map((_, index) => ({
-  guests: '3-5',
-  id: _mock.id(index),
-  bookedAt: _mock.time(index),
-  duration: '3 days 2 nights',
-  isHot: _mock.boolean(index),
-  name: _mock.fullName(index),
-  price: _mock.number.price(index),
-  avatarUrl: _mock.image.avatar(index),
-  coverUrl: _mock.image.travel(index),
-}));
+export const _bankingCreditCard = [
+  {
+    id: _mock.id(2),
+    balance: 23432.03,
+    cardType: 'mastercard',
+    cardHolder: _mock.fullName(2),
+    cardNumber: '**** **** **** 3640',
+    cardValid: '11/22',
+  },
+  {
+    id: _mock.id(3),
+    balance: 18000.23,
+    cardType: 'visa',
+    cardHolder: _mock.fullName(3),
+    cardNumber: '**** **** **** 8864',
+    cardValid: '11/25',
+  },
+  {
+    id: _mock.id(4),
+    balance: 2000.89,
+    cardType: 'mastercard',
+    cardHolder: _mock.fullName(4),
+    cardNumber: '**** **** **** 7755',
+    cardValid: '11/22',
+  },
+];
+
+export const _bankingRecentTransitions = [
+  {
+    id: _mock.id(2),
+    name: _mock.fullName(2),
+    avatarUrl: _mock.image.avatar(2),
+    type: 'Income',
+    message: 'Receive money from',
+    category: 'Annette Black',
+    date: _mock.time(2),
+    status: 'progress',
+    amount: _mock.number.price(2),
+  },
+  {
+    id: _mock.id(3),
+    name: _mock.fullName(3),
+    avatarUrl: _mock.image.avatar(3),
+    type: 'Expenses',
+    message: 'Payment for',
+    category: 'Courtney Henry',
+    date: _mock.time(3),
+    status: 'completed',
+    amount: _mock.number.price(3),
+  },
+  {
+    id: _mock.id(4),
+    name: _mock.fullName(4),
+    avatarUrl: _mock.image.avatar(4),
+    type: 'Receive',
+    message: 'Payment for',
+    category: 'Theresa Webb',
+    date: _mock.time(4),
+    status: 'failed',
+    amount: _mock.number.price(4),
+  },
+  {
+    id: _mock.id(5),
+    name: null,
+    avatarUrl: null,
+    type: 'Expenses',
+    message: 'Payment for',
+    category: 'Beauty & Health',
+    date: _mock.time(5),
+    status: 'completed',
+    amount: _mock.number.price(5),
+  },
+  {
+    id: _mock.id(6),
+    name: null,
+    avatarUrl: null,
+    type: 'Expenses',
+    message: 'Payment for',
+    category: 'Books',
+    date: _mock.time(6),
+    status: 'progress',
+    amount: _mock.number.price(6),
+  },
+];
+
+
