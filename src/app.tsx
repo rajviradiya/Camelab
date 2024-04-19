@@ -1,0 +1,62 @@
+/* eslint-disable perfectionist/sort-imports */
+import 'src/global.css';
+
+// i18n
+import 'src/locales/i18n';
+
+// ----------------------------------------------------------------------
+
+import Router from 'src/routes/sections';
+
+import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
+
+import ThemeProvider from 'src/theme';
+import { LocalizationProvider } from 'src/locales';
+
+import ProgressBar from 'src/components/progress-bar';
+import { MotionLazy } from 'src/components/animate/motion-lazy';
+import SnackbarProvider from 'src/components/snackbar/snackbar-provider';
+
+import { CheckoutProvider } from 'src/sections/checkout/context';
+
+import { AuthProvider } from 'src/auth/context/jwt';
+// import { AuthProvider } from 'src/auth/context/auth0';
+// import { AuthProvider } from 'src/auth/context/amplify';
+// import { AuthProvider } from 'src/auth/context/firebase';
+// import { AuthProvider } from 'src/auth/context/supabase';
+
+// ----------------------------------------------------------------------
+
+export default function App() {
+  const charAt = `
+
+  ░░░    ░░░
+  ▒▒▒▒  ▒▒▒▒
+  ▒▒ ▒▒▒▒ ▒▒
+  ▓▓  ▓▓  ▓▓
+  ██      ██
+
+  `;
+
+  console.info(`%c${charAt}`, 'color: #5BE49B');
+
+  useScrollToTop();
+
+  return (
+    <AuthProvider>
+      <LocalizationProvider>
+        <ThemeProvider>
+          <MotionLazy>
+            <SnackbarProvider>
+              <CheckoutProvider>
+                <ProgressBar />
+
+                <Router />
+              </CheckoutProvider>
+            </SnackbarProvider>
+          </MotionLazy>
+        </ThemeProvider>
+      </LocalizationProvider>
+    </AuthProvider>
+  );
+}
