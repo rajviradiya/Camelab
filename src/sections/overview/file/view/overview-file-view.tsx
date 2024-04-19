@@ -20,7 +20,6 @@ import { UploadBox } from 'src/components/upload';
 import { useSettingsContext } from 'src/components/settings';
 
 import FileWidget from '../../../file-manager/file-widget';
-import FileUpgrade from '../../../file-manager/file-upgrade';
 import FileRecentItem from '../../../file-manager/file-recent-item';
 import FileDataActivity from '../../../file-manager/file-data-activity';
 import FileManagerPanel from '../../../file-manager/file-manager-panel';
@@ -264,8 +263,6 @@ export default function OverviewFileView() {
             />
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>{renderStorageOverview}</Box>
-
-            <FileUpgrade sx={{ mt: 3 }} />
           </Grid>
         </Grid>
       </Container>
