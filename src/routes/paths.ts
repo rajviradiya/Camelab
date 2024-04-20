@@ -96,15 +96,11 @@ export const paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
-    mail: `${ROOTS.DASHBOARD}/mail`,
-    blank: `${ROOTS.DASHBOARD}/blank`,
     walktour: `${ROOTS.DASHBOARD}/walktour`,
-    calendar: `${ROOTS.DASHBOARD}/calendar`,
     permission: `${ROOTS.DASHBOARD}/permission`,
     fileManager: `${ROOTS.DASHBOARD}/file-manager`,
     general: {
       app: `${ROOTS.DASHBOARD}/app`,
-      ecommerce: `${ROOTS.DASHBOARD}/ecommerce`,
       analytics: `${ROOTS.DASHBOARD}/analytics`,
       banking: `${ROOTS.DASHBOARD}/banking`,
       file: `${ROOTS.DASHBOARD}/file`,
