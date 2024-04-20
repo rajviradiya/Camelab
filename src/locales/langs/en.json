@@ -7,7 +7,6 @@
   "shop": "shop",
   "blog": "blog",
   "post": "post",
-  "mail": "mail",
   "chat": "chat",
   "file": "file",
   "tour": "tour",
@@ -28,10 +27,7 @@
   "analytics": "analytics",
   "management": "management",
   "description": "description",
-  "other_cases": "other cases",
   "file_manager": "File Manager",
-  "item_by_roles": "item by roles",
-  "only_admin_can_see_this_item": "Only admin can see this item",
   "demo": {
     "title": "English"
   }
