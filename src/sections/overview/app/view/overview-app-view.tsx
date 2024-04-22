@@ -5,18 +5,17 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
-import { _appFeatured, _appInvoices } from 'src/_mock';
+import { _appFeatured } from 'src/_mock';
 import { SeoIllustration } from 'src/assets/illustrations';
 
 import { useSettingsContext } from 'src/components/settings';
 
 import AppWelcome from '../app-welcome';
 import AppFeatured from '../app-featured';
-import AppNewInvoice from '../app-new-invoice';
+import InvoiceList from "../invoice-list-view"
 import AppAreaInstalled from '../app-area-installed';
 import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentDownload from '../app-current-download';
-
 // ----------------------------------------------------------------------
 
 export default function OverviewAppView() {
@@ -143,8 +142,8 @@ export default function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} lg={8}>
-          <AppNewInvoice
+        <Grid xs={12} lg={12}>
+          {/* <AppNewInvoice
             title="New Invoice"
             tableData={_appInvoices}
             tableLabels={[
@@ -154,7 +153,8 @@ export default function OverviewAppView() {
               { id: 'status', label: 'Status' },
               { id: '' },
             ]}
-          />
+          /> */}
+          <InvoiceList />
         </Grid>
       </Grid>
     </Container>

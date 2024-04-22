@@ -18,7 +18,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 
 import { isAfter, isBetween } from 'src/utils/format-time';
 
-import { _invoices, INVOICE_SERVICE_OPTIONS } from 'src/_mock';
+import { _invoices } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
@@ -37,11 +37,10 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 
-import { IInvoice, IInvoiceTableFilters, IInvoiceTableFilterValue } from 'src/types/invoice';
+import { IInvoice, IInvoiceTableFilters } from 'src/types/invoice';
 
-import InvoiceTableRow from '../../invoice/invoice-table-row';
-import InvoiceTableToolbar from '../../invoice/invoice-table-toolbar';
-import InvoiceTableFiltersResult from '../../invoice/invoice-table-filters-result';
+import InvoiceTableRow from './invoice-table-row';
+
 
 // ----------------------------------------------------------------------
 
@@ -96,21 +95,6 @@ export default function InvoiceListView() {
     (!!filters.startDate && !!filters.endDate);
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
-
-  const handleFilters = useCallback(
-    (name: string, value: IInvoiceTableFilterValue) => {
-      table.onResetPage();
-      setFilters((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    },
-    [table]
-  );
-
-  const handleResetFilters = useCallback(() => {
-    setFilters(defaultFilters);
-  }, []);
 
   const handleDeleteRow = useCallback(
     (id: string) => {
@@ -174,26 +158,6 @@ export default function InvoiceListView() {
         />
 
         <Card>
-          <InvoiceTableToolbar
-            filters={filters}
-            onFilters={handleFilters}
-            //
-            dateError={dateError}
-            serviceOptions={INVOICE_SERVICE_OPTIONS.map((option) => option.name)}
-          />
-
-          {canReset && (
-            <InvoiceTableFiltersResult
-              filters={filters}
-              onFilters={handleFilters}
-              //
-              onResetFilters={handleResetFilters}
-              //
-              results={dataFiltered.length}
-              sx={{ p: 2.5, pt: 0 }}
-            />
-          )}
-
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
             <TableSelectedAction
               numSelected={table.selected.length}
