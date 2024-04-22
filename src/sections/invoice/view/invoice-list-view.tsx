@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
 
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Stack from '@mui/material/Stack';
@@ -8,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
 import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
+import { alpha, useTheme } from '@mui/material/styles';
 import TableContainer from '@mui/material/TableContainer';
 
 import { paths } from 'src/routes/paths';
@@ -20,6 +23,7 @@ import { isAfter, isBetween } from 'src/utils/format-time';
 
 import { _invoices, INVOICE_SERVICE_OPTIONS } from 'src/_mock';
 
+import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { useSnackbar } from 'src/components/snackbar';
@@ -39,14 +43,17 @@ import {
 
 import { IInvoice, IInvoiceTableFilters, IInvoiceTableFilterValue } from 'src/types/invoice';
 
+import InvoiceAnalytic from '../invoice-analytic';
 import InvoiceTableRow from '../../invoice/invoice-table-row';
 import InvoiceTableToolbar from '../../invoice/invoice-table-toolbar';
 import InvoiceTableFiltersResult from '../../invoice/invoice-table-filters-result';
+import { Divider } from '@mui/material';
+import { sumBy } from 'lodash';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'invoiceNumber', label: 'Campaign' },
+  { id: 'invoiceNumber', label: 'Customer' },
   { id: 'createDate', label: 'Create' },
   { id: 'SubmitDate', label: 'Submit' },
   { id: 'price', label: 'Amount' },
@@ -59,6 +66,8 @@ const defaultFilters: IInvoiceTableFilters = {
   startDate: null,
   endDate: null,
 };
+
+// ----------------------------------------------------------------------
 
 export default function InvoiceListView() {
   const { enqueueSnackbar } = useSnackbar();
@@ -89,6 +98,8 @@ export default function InvoiceListView() {
     table.page * table.rowsPerPage + table.rowsPerPage
   );
 
+  const denseHeight = table.dense ? 56 : 56 + 20;
+
   const canReset =
     !!filters.name ||
     !!filters.service.length ||
@@ -96,6 +107,46 @@ export default function InvoiceListView() {
     (!!filters.startDate && !!filters.endDate);
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
+
+  const getInvoiceLength = (status: string) =>
+    tableData.filter((item) => item.status === status).length;
+
+  const getTotalAmount = (status: string) =>
+    sumBy(
+      tableData.filter((item) => item.status === status),
+      'totalAmount'
+    );
+
+  const getPercentByStatus = (status: string) =>
+    (getInvoiceLength(status) / tableData.length) * 100;
+
+  const TABS = [
+    { value: 'all', label: 'All', color: 'default', count: tableData.length },
+    {
+      value: 'paid',
+      label: 'Paid',
+      color: 'success',
+      count: getInvoiceLength('paid'),
+    },
+    {
+      value: 'pending',
+      label: 'Pending',
+      color: 'warning',
+      count: getInvoiceLength('pending'),
+    },
+    {
+      value: 'overdue',
+      label: 'Overdue',
+      color: 'error',
+      count: getInvoiceLength('overdue'),
+    },
+    {
+      value: 'draft',
+      label: 'Draft',
+      color: 'default',
+      count: getInvoiceLength('draft'),
+    },
+  ] as const;
 
   const handleFilters = useCallback(
     (name: string, value: IInvoiceTableFilterValue) => {
@@ -152,12 +203,31 @@ export default function InvoiceListView() {
     [router]
   );
 
+  const handleFilterStatus = useCallback(
+    (event: React.SyntheticEvent, newValue: string) => {
+      handleFilters('status', newValue);
+    },
+    [handleFilters]
+  );
+
   return (
     <>
       <Container maxWidth={settings.themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Campaign"
-          links={[{}]}
+          heading="List"
+          links={[
+            {
+              name: 'Dashboard',
+              href: paths.dashboard.root,
+            },
+            {
+              name: 'Invoice',
+              href: paths.dashboard.invoice.root,
+            },
+            {
+              name: 'List',
+            },
+          ]}
           action={
             <Button
               component={RouterLink}
@@ -173,7 +243,94 @@ export default function InvoiceListView() {
           }}
         />
 
+        <Card
+          sx={{
+            mb: { xs: 3, md: 5 },
+          }}
+        >
+          <Scrollbar>
+            <Stack
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
+              sx={{ py: 2 }}
+            >
+              <InvoiceAnalytic
+                title="Total"
+                total={tableData.length}
+                percent={100}
+                price={sumBy(tableData, 'totalAmount')}
+                icon="solar:bill-list-bold-duotone"
+                color={theme.palette.info.main}
+              />
+
+              <InvoiceAnalytic
+                title="Paid"
+                total={getInvoiceLength('paid')}
+                percent={getPercentByStatus('paid')}
+                price={getTotalAmount('paid')}
+                icon="solar:file-check-bold-duotone"
+                color={theme.palette.success.main}
+              />
+
+              <InvoiceAnalytic
+                title="Pending"
+                total={getInvoiceLength('pending')}
+                percent={getPercentByStatus('pending')}
+                price={getTotalAmount('pending')}
+                icon="solar:sort-by-time-bold-duotone"
+                color={theme.palette.warning.main}
+              />
+
+              <InvoiceAnalytic
+                title="Overdue"
+                total={getInvoiceLength('overdue')}
+                percent={getPercentByStatus('overdue')}
+                price={getTotalAmount('overdue')}
+                icon="solar:bell-bing-bold-duotone"
+                color={theme.palette.error.main}
+              />
+
+              <InvoiceAnalytic
+                title="Draft"
+                total={getInvoiceLength('draft')}
+                percent={getPercentByStatus('draft')}
+                price={getTotalAmount('draft')}
+                icon="solar:file-corrupted-bold-duotone"
+                color={theme.palette.text.secondary}
+              />
+            </Stack>
+          </Scrollbar>
+        </Card>
+
         <Card>
+          <Tabs
+            value={filters.status}
+            onChange={handleFilterStatus}
+            sx={{
+              px: 2.5,
+              boxShadow: `inset 0 -2px 0 0 ${alpha(theme.palette.grey[500], 0.08)}`,
+            }}
+          >
+            {TABS.map((tab) => (
+              <Tab
+                key={tab.value}
+                value={tab.value}
+                label={tab.label}
+                iconPosition="end"
+                icon={
+                  <Label
+                    variant={
+                      ((tab.value === 'all' || tab.value === filters.status) && 'filled') || 'soft'
+                    }
+                    color={tab.color}
+                  >
+                    {tab.count}
+                  </Label>
+                }
+              />
+            ))}
+          </Tabs>
+
           <InvoiceTableToolbar
             filters={filters}
             onFilters={handleFilters}
@@ -196,6 +353,7 @@ export default function InvoiceListView() {
 
           <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
             <TableSelectedAction
+              dense={table.dense}
               numSelected={table.selected.length}
               rowCount={dataFiltered.length}
               onSelectAllRows={(checked) => {
@@ -234,7 +392,7 @@ export default function InvoiceListView() {
             />
 
             <Scrollbar>
-              <Table sx={{ minWidth: 800 }}>
+              <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
                 <TableHeadCustom
                   order={table.order}
                   orderBy={table.orderBy}
@@ -269,6 +427,7 @@ export default function InvoiceListView() {
                     ))}
 
                   <TableEmptyRows
+                    height={denseHeight}
                     emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
                   />
 
@@ -284,6 +443,9 @@ export default function InvoiceListView() {
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
             onRowsPerPageChange={table.onChangeRowsPerPage}
+            //
+            dense={table.dense}
+            onChangeDense={table.onChangeDense}
           />
         </Card>
       </Container>

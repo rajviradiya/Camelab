@@ -6,12 +6,10 @@ import { GridCellParams } from '@mui/x-data-grid';
 import ListItemText from '@mui/material/ListItemText';
 import LinearProgress from '@mui/material/LinearProgress';
 
+import { fDate } from 'src/utils/format-time';
 import { fCurrency } from 'src/utils/format-number';
-import { fTime, fDate } from 'src/utils/format-time';
 
 import Label from 'src/components/label';
-
-// ----------------------------------------------------------------------
 
 type ParamsProps = {
   params: GridCellParams;
@@ -33,7 +31,6 @@ export function RenderCellCreatedAt({ params }: ParamsProps) {
   return (
     <ListItemText
       primary={fDate(params.row.createdAt)}
-      secondary={fTime(params.row.createdAt)}
       primaryTypographyProps={{ typography: 'body2', noWrap: true }}
       secondaryTypographyProps={{
         mt: 0.5,

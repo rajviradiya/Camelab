@@ -8,13 +8,10 @@ import Container from '@mui/material/Container';
 import {
   DataGrid,
   GridColDef,
-  GridToolbarExport,
   GridActionsCellItem,
   GridToolbarContainer,
   GridRowSelectionModel,
   GridToolbarQuickFilter,
-  GridToolbarFilterButton,
-  GridToolbarColumnsButton,
   GridColumnVisibilityModel,
 } from '@mui/x-data-grid';
 
@@ -25,7 +22,6 @@ import { RouterLink } from 'src/routes/components';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { useGetProducts } from 'src/api/product';
-import { PRODUCT_STOCK_OPTIONS } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 import { useSnackbar } from 'src/components/snackbar';
@@ -36,10 +32,9 @@ import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import { IProductItem, IProductTableFilters, IProductTableFilterValue } from 'src/types/product';
 
-import ProductTableToolbar from '../product-table-toolbar';
+// import ProductTableToolbar from '../product-table-toolbar';
 import ProductTableFiltersResult from '../product-table-filters-result';
 import {
-  RenderCellStock,
   RenderCellPrice,
   RenderCellPublish,
   RenderCellProduct,
@@ -151,7 +146,7 @@ export default function ProductListView() {
     },
     {
       field: 'name',
-      headerName: 'Product',
+      headerName: 'Camapign',
       flex: 1,
       minWidth: 360,
       hideable: false,
@@ -159,17 +154,9 @@ export default function ProductListView() {
     },
     {
       field: 'createdAt',
-      headerName: 'Create at',
+      headerName: 'Create',
       width: 160,
       renderCell: (params) => <RenderCellCreatedAt params={params} />,
-    },
-    {
-      field: 'inventoryType',
-      headerName: 'Stock',
-      width: 160,
-      type: 'singleSelect',
-      valueOptions: PRODUCT_STOCK_OPTIONS,
-      renderCell: (params) => <RenderCellStock params={params} />,
     },
     {
       field: 'price',
@@ -180,7 +167,7 @@ export default function ProductListView() {
     },
     {
       field: 'publish',
-      headerName: 'Publish',
+      headerName: 'Status',
       width: 110,
       type: 'singleSelect',
       editable: true,
@@ -239,15 +226,8 @@ export default function ProductListView() {
         }}
       >
         <CustomBreadcrumbs
-          heading="List"
-          links={[
-            { name: 'Dashboard', href: paths.dashboard.root },
-            {
-              name: 'Product',
-              href: paths.dashboard.product.root,
-            },
-            { name: 'List' },
-          ]}
+          heading="Campaign"
+          links={[{}]}
           action={
             <Button
               component={RouterLink}
@@ -296,13 +276,6 @@ export default function ProductListView() {
               toolbar: () => (
                 <>
                   <GridToolbarContainer>
-                    <ProductTableToolbar
-                      filters={filters}
-                      onFilters={handleFilters}
-                      stockOptions={PRODUCT_STOCK_OPTIONS}
-                      publishOptions={PUBLISH_OPTIONS}
-                    />
-
                     <GridToolbarQuickFilter />
 
                     <Stack
@@ -322,10 +295,6 @@ export default function ProductListView() {
                           Delete ({selectedRowIds.length})
                         </Button>
                       )}
-
-                      <GridToolbarColumnsButton />
-                      <GridToolbarFilterButton />
-                      <GridToolbarExport />
                     </Stack>
                   </GridToolbarContainer>
 
