@@ -127,58 +127,6 @@ export const _analyticTraffic = [
   },
 ];
 
-// ECOMMERCE
-// ----------------------------------------------------------------------
-
-export const _ecommerceSalesOverview = ['Total Profit', 'Total Income', 'Total Expenses'].map(
-  (label, index) => ({
-    label,
-    totalAmount: _mock.number.price(index) * 100,
-    value: _mock.number.percent(index),
-  })
-);
-
-export const _ecommerceBestSalesman = [...Array(5)].map((_, index) => {
-  const category = ['CAP', 'Branded Shoes', 'Headphone', 'Cell Phone', 'Earings'][index];
-
-  const flag = ['flagpack:de', 'flagpack:gb-nir', 'flagpack:fr', 'flagpack:kr', 'flagpack:us'][
-    index
-  ];
-
-  return {
-    id: _mock.id(index),
-    flag,
-    category,
-    rank: `Top ${index + 1}`,
-    email: _mock.email(index),
-    name: _mock.fullName(index),
-    totalAmount: _mock.number.price(index),
-    avatarUrl: _mock.image.avatar(index + 8),
-  };
-});
-
-export const _ecommerceLatestProducts = [...Array(5)].map((_, index) => {
-  const colors = (index === 0 && ['#2EC4B6', '#E71D36', '#FF9F1C', '#011627']) ||
-    (index === 1 && ['#92140C', '#FFCF99']) ||
-    (index === 2 && ['#0CECDD', '#FFF338', '#FF67E7', '#C400FF', '#52006A', '#046582']) ||
-    (index === 3 && ['#845EC2', '#E4007C', '#2A1A5E']) || ['#090088'];
-
-  return {
-    id: _mock.id(index),
-    colors,
-    name: _mock.productName(index),
-    price: _mock.number.price(index),
-    coverUrl: _mock.image.product(index),
-    priceSale: [1, 3].includes(index) ? _mock.number.price(index) : 0,
-  };
-});
-
-export const _ecommerceNewProducts = [...Array(5)].map((_, index) => ({
-  id: _mock.id(index),
-  name: _mock.productName(index),
-  coverUrl: _mock.image.product(index),
-}));
-
 // BANKING
 // ----------------------------------------------------------------------
 

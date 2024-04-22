@@ -27,8 +27,6 @@ const ICONS = {
   banking: icon('ic_banking'),
   invoice: icon('ic_invoice'),
   product: icon('ic_product'),
-  calendar: icon('ic_calendar'),
-  ecommerce: icon('ic_ecommerce'),
   analytics: icon('ic_analytics'),
   dashboard: icon('ic_dashboard'),
 };
