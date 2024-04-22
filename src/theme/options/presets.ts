@@ -32,8 +32,6 @@ const purple = {
   contrastText: '#FFFFFF',
 };
 
-export const presetOptions = [{ name: 'purple', value: purple.main }];
-
 export function getPrimary(preset: PresetType) {
   return {
     purple,
