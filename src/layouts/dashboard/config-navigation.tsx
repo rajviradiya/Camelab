@@ -4,7 +4,6 @@ import { paths } from 'src/routes/paths';
 
 import { useTranslate } from 'src/locales';
 
-import Label from 'src/components/label';
 import SvgColor from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -20,7 +19,6 @@ const icon = (name: string) => (
 const ICONS = {
   job: icon('ic_job'),
   blog: icon('ic_blog'),
-  mail: icon('ic_mail'),
   user: icon('ic_user'),
   file: icon('ic_file'),
   tour: icon('ic_tour'),
@@ -177,14 +175,6 @@ export function useNavData() {
             title: t('file_manager'),
             path: paths.dashboard.fileManager,
             icon: ICONS.folder,
-          },
-
-          // MAIL
-          {
-            title: t('mail'),
-            path: paths.dashboard.mail,
-            icon: ICONS.mail,
-            info: <Label color="error">+32</Label>,
           },
         ],
       },
