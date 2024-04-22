@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -14,7 +14,6 @@ import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { useGetProduct } from 'src/api/product';
-import { PRODUCT_PUBLISH_OPTIONS } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 import EmptyContent from 'src/components/empty-content';
@@ -23,11 +22,8 @@ import { useSettingsContext } from 'src/components/settings';
 import { ProductDetailsSkeleton } from '../product-skeleton';
 import ProductDetailsReview from '../product-details-review';
 import ProductDetailsSummary from '../product-details-summary';
-import ProductDetailsToolbar from '../product-details-toolbar';
 import ProductDetailsCarousel from '../product-details-carousel';
 import ProductDetailsDescription from '../product-details-description';
-
-// ----------------------------------------------------------------------
 
 const SUMMARY = [
   {
@@ -47,8 +43,6 @@ const SUMMARY = [
   },
 ];
 
-// ----------------------------------------------------------------------
-
 type Props = {
   id: string;
 };
@@ -59,18 +53,6 @@ export default function ProductDetailsView({ id }: Props) {
   const settings = useSettingsContext();
 
   const [currentTab, setCurrentTab] = useState('description');
-
-  const [publish, setPublish] = useState('');
-
-  useEffect(() => {
-    if (product) {
-      setPublish(product?.publish);
-    }
-  }, [product]);
-
-  const handleChangePublish = useCallback((newValue: string) => {
-    setPublish(newValue);
-  }, []);
 
   const handleChangeTab = useCallback((event: React.SyntheticEvent, newValue: string) => {
     setCurrentTab(newValue);
@@ -98,15 +80,6 @@ export default function ProductDetailsView({ id }: Props) {
 
   const renderProduct = product && (
     <>
-      <ProductDetailsToolbar
-        backLink={paths.dashboard.product.root}
-        editLink={paths.dashboard.product.edit(`${product?.id}`)}
-        liveLink={paths.product.details(`${product?.id}`)}
-        publish={publish || ''}
-        onChangePublish={handleChangePublish}
-        publishOptions={PRODUCT_PUBLISH_OPTIONS}
-      />
-
       <Grid container spacing={{ xs: 3, md: 5, lg: 8 }}>
         <Grid xs={12} md={6} lg={7}>
           <ProductDetailsCarousel product={product} />
