@@ -5,14 +5,7 @@ import axios, { endpoints } from 'src/utils/axios';
 import { AuthContext } from './auth-context';
 import { setSession, isValidToken } from './utils';
 import { AuthUserType, ActionMapType, AuthStateType } from '../../types';
-
-// ----------------------------------------------------------------------
-/**
- * NOTE:
- * We only build demo at basic level.
- * Customer will need to do some extra handling yourself if you want to extend the logic and other features...
- */
-// ----------------------------------------------------------------------
+// import { useDispatch } from 'react-redux';
 
 enum Types {
   INITIAL = 'INITIAL',
@@ -81,6 +74,7 @@ type Props = {
 
 export function AuthProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // const dispatch = useDispatch();
 
   const initialize = useCallback(async () => {
     try {
