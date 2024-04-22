@@ -93,8 +93,6 @@ export function fShortenNumber(inputValue: InputValue) {
   return fm.replace(/[A-Z]/g, (match) => match.toLowerCase());
 }
 
-// ----------------------------------------------------------------------
-
 export function fData(inputValue: InputValue) {
   if (!inputValue) return '';
 
