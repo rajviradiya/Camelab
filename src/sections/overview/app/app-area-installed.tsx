@@ -46,7 +46,7 @@ export default function AppAreaInstalled({ title, subheader, chart, ...other }: 
 
   const popover = usePopover();
 
-  const [seriesData, setSeriesData] = useState('2019');
+  const [seriesData, setSeriesData] = useState('2024');
 
   const chartOptions = useChart({
     colors: colors.map((colr) => colr[1]),

@@ -46,7 +46,7 @@ export function useNavData() {
         subheader: t('overview'),
         items: [
           {
-            title: t('app'),
+            title: t('Dashboard'),
             path: paths.dashboard.root,
             icon: ICONS.dashboard,
           },

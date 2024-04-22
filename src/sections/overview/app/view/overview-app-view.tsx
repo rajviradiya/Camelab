@@ -5,19 +5,17 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { useMockedUser } from 'src/hooks/use-mocked-user';
 
+import { _appFeatured, _appInvoices } from 'src/_mock';
 import { SeoIllustration } from 'src/assets/illustrations';
-import { _appAuthors, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
 
 import { useSettingsContext } from 'src/components/settings';
 
 import AppWelcome from '../app-welcome';
 import AppFeatured from '../app-featured';
 import AppNewInvoice from '../app-new-invoice';
-import AppTopAuthors from '../app-top-authors';
 import AppAreaInstalled from '../app-area-installed';
 import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentDownload from '../app-current-download';
-import AppTopInstalledCountries from '../app-top-installed-countries';
 
 // ----------------------------------------------------------------------
 
@@ -50,9 +48,8 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
-            title="Total Active Users"
-            percent={2.6}
-            total={18765}
+            title="Total Campaign"
+            total={43.7}
             chart={{
               series: [5, 18, 12, 51, 68, 11, 39, 37, 27, 20],
             }}
@@ -61,9 +58,8 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={4}>
           <AppWidgetSummary
-            title="Total Installed"
-            percent={0.2}
-            total={4876}
+            title="Total Spends"
+            total={66.3}
             chart={{
               colors: [theme.palette.info.light, theme.palette.info.main],
               series: [20, 41, 63, 33, 28, 35, 50, 46, 11, 26],
@@ -74,8 +70,7 @@ export default function OverviewAppView() {
         <Grid xs={12} md={4}>
           <AppWidgetSummary
             title="Total Downloads"
-            percent={-0.1}
-            total={678}
+            total={92.3}
             chart={{
               colors: [theme.palette.warning.light, theme.palette.warning.main],
               series: [8, 9, 31, 8, 16, 37, 8, 33, 46, 31],
@@ -85,13 +80,13 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={6} lg={4}>
           <AppCurrentDownload
-            title="Current Download"
+            title="Campaign"
             chart={{
               series: [
-                { label: 'Mac', value: 12244 },
-                { label: 'Window', value: 53345 },
-                { label: 'iOS', value: 44313 },
-                { label: 'Android', value: 78343 },
+                { label: 'Reject', value: 12244 },
+                { label: 'Pending', value: 53345 },
+                { label: 'Completed', value: 44313 },
+                { label: 'Approved', value: 78343 },
               ],
             }}
           />
@@ -99,7 +94,7 @@ export default function OverviewAppView() {
 
         <Grid xs={12} md={6} lg={8}>
           <AppAreaInstalled
-            title="Area Installed"
+            title="Total Spends"
             subheader="(+43%) than last year"
             chart={{
               categories: [
@@ -118,27 +113,27 @@ export default function OverviewAppView() {
               ],
               series: [
                 {
-                  year: '2019',
+                  year: '2023',
                   data: [
                     {
-                      name: 'Asia',
+                      name: 'Spends',
                       data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
                     },
                     {
-                      name: 'America',
+                      name: 'Competed',
                       data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
                     },
                   ],
                 },
                 {
-                  year: '2020',
+                  year: '2024',
                   data: [
                     {
-                      name: 'Asia',
+                      name: 'Spends',
                       data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
                     },
                     {
-                      name: 'America',
+                      name: 'Competed',
                       data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
                     },
                   ],
@@ -160,14 +155,6 @@ export default function OverviewAppView() {
               { id: '' },
             ]}
           />
-        </Grid>
-
-        <Grid xs={12} md={6} lg={4}>
-          <AppTopInstalledCountries title="Top Installed Countries" list={_appInstalled} />
-        </Grid>
-
-        <Grid xs={12} md={6} lg={4}>
-          <AppTopAuthors title="Top Authors" list={_appAuthors} />
         </Grid>
       </Grid>
     </Container>

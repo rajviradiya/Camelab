@@ -273,5 +273,3 @@ export const _bankingRecentTransitions = [
     amount: _mock.number.price(6),
   },
 ];
-
-
