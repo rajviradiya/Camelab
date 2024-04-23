@@ -1,3 +1,4 @@
+import sumBy from 'lodash/sumBy';
 import { useState, useCallback } from 'react';
 
 import Tab from '@mui/material/Tab';
@@ -6,6 +7,7 @@ import Card from '@mui/material/Card';
 import Table from '@mui/material/Table';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
 import TableBody from '@mui/material/TableBody';
@@ -44,11 +46,9 @@ import {
 import { IInvoice, IInvoiceTableFilters, IInvoiceTableFilterValue } from 'src/types/invoice';
 
 import InvoiceAnalytic from '../invoice-analytic';
-import InvoiceTableRow from '../../invoice/invoice-table-row';
-import InvoiceTableToolbar from '../../invoice/invoice-table-toolbar';
-import InvoiceTableFiltersResult from '../../invoice/invoice-table-filters-result';
-import { Divider } from '@mui/material';
-import { sumBy } from 'lodash';
+import InvoiceTableRow from '../invoice-table-row';
+import InvoiceTableToolbar from '../invoice-table-toolbar';
+import InvoiceTableFiltersResult from '../invoice-table-filters-result';
 
 // ----------------------------------------------------------------------
 
@@ -71,6 +71,8 @@ const defaultFilters: IInvoiceTableFilters = {
 
 export default function InvoiceListView() {
   const { enqueueSnackbar } = useSnackbar();
+
+  const theme = useTheme();
 
   const settings = useSettingsContext();
 
