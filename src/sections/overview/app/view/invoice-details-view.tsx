@@ -7,7 +7,7 @@ import { _invoices } from 'src/_mock';
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
-import InvoiceDetails from '../invoice-details';
+import InvoiceDetails from '../../../invoice/invoice-details';
 
 // ----------------------------------------------------------------------
 

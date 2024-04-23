@@ -12,7 +12,6 @@ import TableContainer from '@mui/material/TableContainer';
 
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
@@ -39,7 +38,7 @@ import {
 
 import { IInvoice, IInvoiceTableFilters } from 'src/types/invoice';
 
-import InvoiceTableRow from './invoice-table-row';
+import InvoiceTableRow from '../invoice-table-row';
 
 
 // ----------------------------------------------------------------------
@@ -49,6 +48,8 @@ const TABLE_HEAD = [
   { id: 'createDate', label: 'Create' },
   { id: 'SubmitDate', label: 'Submit' },
   { id: 'price', label: 'Amount' },
+  { id: '', label: '' },
+
 ];
 
 const defaultFilters: IInvoiceTableFilters = {
@@ -96,18 +97,18 @@ export default function InvoiceListView() {
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
-  const handleDeleteRow = useCallback(
-    (id: string) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
+  // const handleDeleteRow = useCallback(
+  //   (id: string) => {
+  //     const deleteRow = tableData.filter((row) => row.id !== id);
 
-      enqueueSnackbar('Delete success!');
+  //     enqueueSnackbar('Delete success!');
 
-      setTableData(deleteRow);
+  //     setTableData(deleteRow);
 
-      table.onUpdatePageDeleteRow(dataInPage.length);
-    },
-    [dataInPage.length, enqueueSnackbar, table, tableData]
-  );
+  //     table.onUpdatePageDeleteRow(dataInPage.length);
+  //   },
+  //   [dataInPage.length, enqueueSnackbar, table, tableData]
+  // );
 
   const handleDeleteRows = useCallback(() => {
     const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
@@ -122,16 +123,16 @@ export default function InvoiceListView() {
     });
   }, [dataFiltered.length, dataInPage.length, enqueueSnackbar, table, tableData]);
 
-  const handleEditRow = useCallback(
-    (id: string) => {
-      router.push(paths.dashboard.invoice.edit(id));
-    },
-    [router]
-  );
+  // const handleEditRow = useCallback(
+  //   (id: string) => {
+  //     router.push(paths.dashboard.invoice.edit(id));
+  //   },
+  //   [router]
+  // );
 
   const handleViewRow = useCallback(
     (id: string) => {
-      router.push(paths.dashboard.invoice.details(id));
+      router.push(paths.dashboard.details(id));
     },
     [router]
   );
@@ -142,16 +143,6 @@ export default function InvoiceListView() {
         <CustomBreadcrumbs
           heading="Campaign"
           links={[{}]}
-          action={
-            <Button
-              component={RouterLink}
-              href={paths.dashboard.invoice.new}
-              variant="contained"
-              startIcon={<Iconify icon="mingcute:add-line" />}
-            >
-              New Invoice
-            </Button>
-          }
           sx={{
             mb: { xs: 3, md: 5 },
           }}
@@ -227,8 +218,8 @@ export default function InvoiceListView() {
                         selected={table.selected.includes(row.id)}
                         onSelectRow={() => table.onSelectRow(row.id)}
                         onViewRow={() => handleViewRow(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
+                      // onEditRow={() => handleEditRow(row.id)}
+                      // onDeleteRow={() => handleDeleteRow(row.id)}
                       />
                     ))}
 

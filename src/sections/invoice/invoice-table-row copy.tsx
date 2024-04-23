@@ -20,9 +20,6 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 import { IInvoice } from 'src/types/invoice';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import InvoicePDF from 'src/sections/invoice/invoice-pdf';
-import { CircularProgress, Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -138,23 +135,6 @@ export default function InvoiceTableRow({
             popover.onClose();
           }}
         >
-          {/* <PDFDownloadLink
-            document={<InvoicePDF invoice={invoice} currentStatus={currentStatus} />}
-            fileName={invoice.invoiceNumber}
-            style={{ textDecoration: 'none' }}
-          >
-            {({ loading }) => (
-              <Tooltip title="Download">
-                <IconButton>
-                  {loading ? (
-                    <CircularProgress size={24} color="inherit" />
-                  ) : (
-                    <Iconify icon="eva:cloud-download-fill" />
-                  )}
-                </IconButton>
-              </Tooltip>
-            )}
-          </PDFDownloadLink> */}
           <Iconify icon="solar:pen-bold" />
           Download
         </MenuItem>

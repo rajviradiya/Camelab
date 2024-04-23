@@ -67,6 +67,7 @@ export const dashboardRoutes = [
     ),
     children: [
       { element: <IndexPage />, index: true },
+      { path: ':id', element: <InvoiceDetailsPage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
       { path: 'banking', element: <OverviewBankingPage /> },
       { path: 'file', element: <OverviewFilePage /> },
