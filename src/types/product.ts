@@ -70,6 +70,7 @@ export type IProductItem = {
     enabled: boolean;
     content: string;
   };
+  status: string;
 };
 
 export type IProductTableFilterValue = string | string[];
@@ -77,4 +78,5 @@ export type IProductTableFilterValue = string | string[];
 export type IProductTableFilters = {
   stock: string[];
   publish: string[];
+  status: 'all';
 };

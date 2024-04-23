@@ -1,10 +1,13 @@
+import sumBy from 'lodash/sumBy';
 import isEqual from 'lodash/isEqual';
 import { useState, useEffect, useCallback } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
+import { useTheme } from '@mui/material/styles';
 import {
   DataGrid,
   GridColDef,
@@ -24,6 +27,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { useGetProducts } from 'src/api/product';
 
 import Iconify from 'src/components/iconify';
+import Scrollbar from 'src/components/scrollbar';
 import { useSnackbar } from 'src/components/snackbar';
 import EmptyContent from 'src/components/empty-content';
 import { ConfirmDialog } from 'src/components/custom-dialog';
@@ -32,6 +36,7 @@ import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import { IProductItem, IProductTableFilters, IProductTableFilterValue } from 'src/types/product';
 
+import InvoiceAnalytic from '../invoice-analytics';
 // import ProductTableToolbar from '../product-table-toolbar';
 import ProductTableFiltersResult from '../product-table-filters-result';
 import {
@@ -41,16 +46,15 @@ import {
   RenderCellCreatedAt,
 } from '../product-table-row';
 
-// ----------------------------------------------------------------------
-
-const PUBLISH_OPTIONS = [
-  { value: 'published', label: 'Published' },
-  { value: 'draft', label: 'Draft' },
-];
+// const PUBLISH_OPTIONS = [
+//   { value: 'published', label: 'Published' },
+//   { value: 'draft', label: 'Draft' },
+// ];
 
 const defaultFilters: IProductTableFilters = {
   publish: [],
   stock: [],
+  status: 'all',
 };
 
 const HIDE_COLUMNS = {
@@ -63,6 +67,8 @@ const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
 
 export default function ProductListView() {
   const { enqueueSnackbar } = useSnackbar();
+
+  const theme = useTheme();
 
   const confirmRows = useBoolean();
 
@@ -171,7 +177,7 @@ export default function ProductListView() {
       width: 110,
       type: 'singleSelect',
       editable: true,
-      valueOptions: PUBLISH_OPTIONS,
+      // valueOptions: PUBLISH_OPTIONS,
       renderCell: (params) => <RenderCellPublish params={params} />,
     },
     {
@@ -215,6 +221,18 @@ export default function ProductListView() {
       .filter((column) => !HIDE_COLUMNS_TOGGLABLE.includes(column.field))
       .map((column) => column.field);
 
+  const getInvoiceLength = (status: string) =>
+    tableData.filter((item) => item.status === status).length;
+
+  const getTotalAmount = (status: string) =>
+    sumBy(
+      tableData.filter((item) => item.status === status),
+      'totalAmount'
+    );
+
+  const getPercentByStatus = (status: string) =>
+    (getInvoiceLength(status) / tableData.length) * 100;
+
   return (
     <>
       <Container
@@ -248,7 +266,65 @@ export default function ProductListView() {
 
         <Card
           sx={{
-            height: { xs: 800, md: 2 },
+            mb: { xs: 3, md: 6 },
+          }}
+        >
+          <Scrollbar>
+            <Stack
+              direction="row"
+              divider={<Divider orientation="vertical" flexItem sx={{ borderStyle: 'dashed' }} />}
+              sx={{ py: 2 }}
+            >
+              <InvoiceAnalytic
+                title="Total"
+                total={tableData.length}
+                percent={100}
+                price={sumBy(tableData, 'totalAmount')}
+                icon="solar:bill-list-bold-duotone"
+                color={theme.palette.info.main}
+              />
+
+              <InvoiceAnalytic
+                title="Paid"
+                total={getInvoiceLength('paid')}
+                percent={getPercentByStatus('paid')}
+                price={getTotalAmount('paid')}
+                icon="solar:file-check-bold-duotone"
+                color={theme.palette.success.main}
+              />
+
+              <InvoiceAnalytic
+                title="Pending"
+                total={getInvoiceLength('pending')}
+                percent={getPercentByStatus('pending')}
+                price={getTotalAmount('pending')}
+                icon="solar:sort-by-time-bold-duotone"
+                color={theme.palette.warning.main}
+              />
+
+              <InvoiceAnalytic
+                title="Overdue"
+                total={getInvoiceLength('overdue')}
+                percent={getPercentByStatus('overdue')}
+                price={getTotalAmount('overdue')}
+                icon="solar:bell-bing-bold-duotone"
+                color={theme.palette.error.main}
+              />
+
+              <InvoiceAnalytic
+                title="Draft"
+                total={getInvoiceLength('draft')}
+                percent={getPercentByStatus('draft')}
+                price={getTotalAmount('draft')}
+                icon="solar:file-corrupted-bold-duotone"
+                color={theme.palette.text.secondary}
+              />
+            </Stack>
+          </Scrollbar>
+        </Card>
+
+        <Card
+          sx={{
             flexGrow: { md: 1 },
             display: { md: 'flex' },
             flexDirection: { md: 'column' },
@@ -346,8 +422,6 @@ export default function ProductListView() {
     </>
   );
 }
-
-// ----------------------------------------------------------------------
 
 function applyFilter({
   inputData,
