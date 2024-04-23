@@ -24,6 +24,8 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
+// import { _invoices } from 'src/_mock';
+import { _invoices } from 'src/_mock';
 import { useGetProducts } from 'src/api/product';
 
 import Iconify from 'src/components/iconify';
@@ -34,6 +36,7 @@ import { ConfirmDialog } from 'src/components/custom-dialog';
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
+import { IInvoice } from 'src/types/invoice';
 import { IProductItem, IProductTableFilters, IProductTableFilterValue } from 'src/types/product';
 
 import InvoiceAnalytic from '../invoice-analytics';
@@ -72,7 +75,7 @@ export default function ProductListView() {
 
   const theme = useTheme();
 
-  // const [tableData, setTableData] = useState<IInvoice[]>(_invoices);
+  const [tableDataInvoice, setTableDataInvoice] = useState<IInvoice[]>(_invoices);
 
   const confirmRows = useBoolean();
 
@@ -82,7 +85,7 @@ export default function ProductListView() {
 
   const { products, productsLoading } = useGetProducts();
 
-  const [tableData, setTableData] = useState<IProductItem[]>([]);
+  const [tableData, setTableData] = useState<IProductItem[]>([] || _invoices);
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -226,16 +229,16 @@ export default function ProductListView() {
       .map((column) => column.field);
 
   const getInvoiceLength = (status: string) =>
-    tableData.filter((item) => item.status === status).length;
+    tableDataInvoice.filter((item) => item.status === status).length;
 
   const getTotalAmount = (status: string) =>
     sumBy(
-      tableData.filter((item) => item.status === status),
+      tableDataInvoice.filter((item) => item.status === status),
       'totalAmount'
     );
 
   const getPercentByStatus = (status: string) =>
-    (getInvoiceLength(status) / tableData.length) * 100;
+    (getInvoiceLength(status) / tableDataInvoice.length) * 100;
 
   return (
     <>
@@ -281,15 +284,15 @@ export default function ProductListView() {
             >
               <InvoiceAnalytic
                 title="Total"
-                total={tableData.length}
+                total={tableDataInvoice.length}
                 percent={100}
-                price={sumBy(tableData, 'totalAmount')}
+                price={sumBy(tableDataInvoice, 'totalAmount')}
                 icon="solar:bill-list-bold-duotone"
                 color={theme.palette.info.main}
               />
 
               <InvoiceAnalytic
-                title="Paid"
+                title="Approved"
                 total={getInvoiceLength('paid')}
                 percent={getPercentByStatus('paid')}
                 price={getTotalAmount('paid')}
@@ -307,7 +310,7 @@ export default function ProductListView() {
               />
 
               <InvoiceAnalytic
-                title="Overdue"
+                title="Reject"
                 total={getInvoiceLength('overdue')}
                 percent={getPercentByStatus('overdue')}
                 price={getTotalAmount('overdue')}
@@ -316,7 +319,7 @@ export default function ProductListView() {
               />
 
               <InvoiceAnalytic
-                title="Draft"
+                title="Completed"
                 total={getInvoiceLength('draft')}
                 percent={getPercentByStatus('draft')}
                 price={getTotalAmount('draft')}
