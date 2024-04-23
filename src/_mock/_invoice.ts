@@ -32,7 +32,7 @@ const ITEMS = [...Array(3)].map((__, index) => {
   };
 });
 
-export const  _invoices = [...Array(20)].map((_, index) => {
+export const _invoices = [...Array(20)].map((_, index) => {
   const taxes = _mock.number.price(index + 1);
 
   const discount = _mock.number.price(index + 2);

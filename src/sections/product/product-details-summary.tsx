@@ -285,20 +285,6 @@ export default function ProductDetailsSummary({
     </Typography>
   );
 
-  const renderRating = (
-    <Stack
-      direction="row"
-      alignItems="center"
-      sx={{
-        color: 'text.disabled',
-        typography: 'body2',
-      }}
-    >
-      <Rating size="small" value={totalRatings} precision={0.1} readOnly sx={{ mr: 1 }} />
-      {`(${fShortenNumber(totalReviews)} reviews)`}
-    </Stack>
-  );
-
   const renderLabels = (newLabel.enabled || saleLabel.enabled) && (
     <Stack direction="row" alignItems="center" spacing={1}>
       {newLabel.enabled && <Label color="info">{newLabel.content}</Label>}
@@ -330,8 +316,6 @@ export default function ProductDetailsSummary({
           {renderInventoryType}
 
           <Typography variant="h5">{name}</Typography>
-
-          {renderRating}
 
           {renderPrice}
 

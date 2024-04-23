@@ -24,7 +24,6 @@ import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-// import { _invoices } from 'src/_mock';
 import { _invoices } from 'src/_mock';
 import { useGetProducts } from 'src/api/product';
 
@@ -48,8 +47,6 @@ import {
   RenderCellProduct,
   RenderCellCreatedAt,
 } from '../product-table-row';
-
-// ----------------------------------------------------------------------
 
 const PUBLISH_OPTIONS = [
   { value: 'published', label: 'Published' },
@@ -285,10 +282,10 @@ export default function ProductListView() {
               <InvoiceAnalytic
                 title="Total"
                 total={tableDataInvoice.length}
-                percent={100}
+                percent={80}
                 price={sumBy(tableDataInvoice, 'totalAmount')}
                 icon="solar:bill-list-bold-duotone"
-                color={theme.palette.info.main}
+                color={theme.palette.warning.main}
               />
 
               <InvoiceAnalytic
@@ -306,7 +303,7 @@ export default function ProductListView() {
                 percent={getPercentByStatus('pending')}
                 price={getTotalAmount('pending')}
                 icon="solar:sort-by-time-bold-duotone"
-                color={theme.palette.warning.main}
+                color={theme.palette.info.main}
               />
 
               <InvoiceAnalytic

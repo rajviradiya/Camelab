@@ -28,6 +28,7 @@ const ICONS = {
   invoice: icon('ic_invoice'),
   product: icon('ic_product'),
   analytics: icon('ic_analytics'),
+  ecommerce: icon('ic_ecommerce'),
   dashboard: icon('ic_dashboard'),
 };
 
@@ -47,6 +48,21 @@ export function useNavData() {
             title: t('Dashboard'),
             path: paths.dashboard.root,
             icon: ICONS.dashboard,
+          },
+          // PRODUCT
+          {
+            title: t('Camapaign'),
+            path: paths.dashboard.product.root,
+            icon: ICONS.ecommerce,
+            children: [
+              { title: t('list'), path: paths.dashboard.product.root },
+              {
+                title: t('details'),
+                path: paths.dashboard.product.demo.details,
+              },
+              { title: t('create'), path: paths.dashboard.product.new },
+              { title: t('edit'), path: paths.dashboard.product.demo.edit },
+            ],
           },
           {
             title: t('analytics'),
@@ -83,22 +99,6 @@ export function useNavData() {
               { title: t('create'), path: paths.dashboard.user.new },
               { title: t('edit'), path: paths.dashboard.user.demo.edit },
               { title: t('account'), path: paths.dashboard.user.account },
-            ],
-          },
-
-          // PRODUCT
-          {
-            title: t('product'),
-            path: paths.dashboard.product.root,
-            icon: ICONS.product,
-            children: [
-              { title: t('list'), path: paths.dashboard.product.root },
-              {
-                title: t('details'),
-                path: paths.dashboard.product.demo.details,
-              },
-              { title: t('create'), path: paths.dashboard.product.new },
-              { title: t('edit'), path: paths.dashboard.product.demo.edit },
             ],
           },
 
