@@ -96,6 +96,7 @@ export const paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
+    details: (id: string) => `${ROOTS.DASHBOARD}/${id}`,
     walktour: `${ROOTS.DASHBOARD}/walktour`,
     permission: `${ROOTS.DASHBOARD}/permission`,
     fileManager: `${ROOTS.DASHBOARD}/file-manager`,

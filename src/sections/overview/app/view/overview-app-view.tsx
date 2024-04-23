@@ -12,7 +12,7 @@ import { useSettingsContext } from 'src/components/settings';
 
 import AppWelcome from '../app-welcome';
 import AppFeatured from '../app-featured';
-import InvoiceList from "../invoice-list-view"
+import InvoiceList from "./invoice-list-view"
 import AppAreaInstalled from '../app-area-installed';
 import AppWidgetSummary from '../app-widget-summary';
 import AppCurrentDownload from '../app-current-download';
