@@ -1,7 +1,5 @@
 import Link from '@mui/material/Link';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,19 +8,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 
-import { useBoolean } from 'src/hooks/use-boolean';
-
 import { fCurrency } from 'src/utils/format-number';
 import { fDate, fTime } from 'src/utils/format-time';
 
 import Iconify from 'src/components/iconify';
-import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 import { IInvoice } from 'src/types/invoice';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import InvoicePDF from 'src/sections/invoice/invoice-pdf';
-import { CircularProgress, Tooltip } from '@mui/material';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
+// import InvoicePDF from 'src/sections/invoice/invoice-pdf';
+// import { CircularProgress, Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -44,8 +39,6 @@ export default function InvoiceTableRow({
   // onDeleteRow,
 }: Props) {
   const { invoiceNumber, createDate, dueDate, invoiceTo, totalAmount } = row;
-
-  const confirm = useBoolean();
 
   const popover = usePopover();
 
