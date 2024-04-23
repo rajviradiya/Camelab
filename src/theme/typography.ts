@@ -87,6 +87,14 @@ export const typography = {
     lineHeight: 22 / 14,
     fontSize: pxToRem(14),
   },
+  // subtitle3: {
+  //   fontSize: pxToRem(16),
+  //   fontWeight: 600,
+  // },
+  // subtitle4: {
+  //   fontSize: pxToRem(14),
+  //   fontWeight: 400,
+  // },
   body1: {
     lineHeight: 1.5,
     fontSize: pxToRem(16),

@@ -1,9 +1,30 @@
 // ----------------------------------------------------------------------
 
 export const PRODUCT_GENDER_OPTIONS = [
-  { label: 'Men', value: 'Men' },
-  { label: 'Women', value: 'Women' },
-  { label: 'Kids', value: 'Kids' },
+  { label: 'Male', value: 'Men' },
+  { label: 'Female', value: 'Women' },
+];
+
+export const PRODUCT_SELECT_OPTIONS = [
+  { label: 'All', value: 'All' },
+  { label: 'Selected', value: 'Selected' },
+];
+
+export const PRODUCT_EXPERIENCE_OPTIONS = [
+  { label: 'No experience', value: 'No experience' },
+  { label: '1 Year', value: '1 Year' },
+  { label: '2 Year', value: '2 Year' },
+  { label: '>3 Year', value: '>3 Year' },
+];
+
+export const PRODUCT_SERVICE_OPTIONS = [
+  { label: 'Product(s)', value: 'Product(s)' },
+  { label: 'Service(s)', value: 'Service(s)' },
+];
+
+export const CITY_OPTIONS = [
+  { label: 'Cities', value: 'Cities' },
+  { label: 'Countries', value: 'Countries' },
 ];
 
 export const PRODUCT_CATEGORY_OPTIONS = ['Shose', 'Apparel', 'Accessories'];

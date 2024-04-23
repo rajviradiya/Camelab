@@ -1,7 +1,5 @@
 import Container from '@mui/material/Container';
 
-import { paths } from 'src/routes/paths';
-
 import { useSettingsContext } from 'src/components/settings';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
@@ -15,18 +13,8 @@ export default function ProductCreateView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new product"
-        links={[
-          {
-            name: 'Dashboard',
-            href: paths.dashboard.root,
-          },
-          {
-            name: 'Product',
-            href: paths.dashboard.product.root,
-          },
-          { name: 'New product' },
-        ]}
+        heading="Create a new Campaign"
+        links={[{}]}
         sx={{
           mb: { xs: 3, md: 5 },
         }}
