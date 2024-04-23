@@ -46,10 +46,12 @@ import {
   RenderCellCreatedAt,
 } from '../product-table-row';
 
-// const PUBLISH_OPTIONS = [
-//   { value: 'published', label: 'Published' },
-//   { value: 'draft', label: 'Draft' },
-// ];
+// ----------------------------------------------------------------------
+
+const PUBLISH_OPTIONS = [
+  { value: 'published', label: 'Published' },
+  { value: 'draft', label: 'Draft' },
+];
 
 const defaultFilters: IProductTableFilters = {
   publish: [],
@@ -69,6 +71,8 @@ export default function ProductListView() {
   const { enqueueSnackbar } = useSnackbar();
 
   const theme = useTheme();
+
+  // const [tableData, setTableData] = useState<IInvoice[]>(_invoices);
 
   const confirmRows = useBoolean();
 
@@ -177,7 +181,7 @@ export default function ProductListView() {
       width: 110,
       type: 'singleSelect',
       editable: true,
-      // valueOptions: PUBLISH_OPTIONS,
+      valueOptions: PUBLISH_OPTIONS,
       renderCell: (params) => <RenderCellPublish params={params} />,
     },
     {
@@ -422,6 +426,8 @@ export default function ProductListView() {
     </>
   );
 }
+
+// ----------------------------------------------------------------------
 
 function applyFilter({
   inputData,
